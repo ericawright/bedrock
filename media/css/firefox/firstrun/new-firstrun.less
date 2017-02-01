@@ -38,7 +38,7 @@ img {
     z-index: 3;
 }
 
-#scene-blur, #mountains-trees, #foreground-fox, #sky {
+#scene-blur, #mountains, #trees, #foreground-fox, #sky {
     opacity: 0;
 }
 
@@ -54,12 +54,13 @@ img {
     border: none;
     position: relative;
     transition: height .3s ease-in-out;
+    width: 320px;
 }
 
 #fxa-iframe-config {
     background: #fff;
     border-radius: 5px;
-    padding: 25px 15px 20px 15px;
+    padding: 25px 5px 20px 5px;
     display: inline-block;
     margin-left: 65px;
 }
@@ -150,24 +151,24 @@ img {
     }
 
     #sunrise {
-        transition: transform 1.5s cubic-bezier(.41,.61,.54,.96) 0.5s;
+        transition: transform 2.5s cubic-bezier(.41,.61,.54,.96) .5s;
         transform: none;
     }
 
-    #mountains-trees, #foreground-fox, #sky {
-        transition: opacity 2s ease-in-out .5s;
+    #mountains, #trees, #foreground-fox, #sky {
+        transition: opacity 3s ease-in-out 1.5s;
         opacity: 1;
     }
 }
 
 #scene[data-modal=true] {
 
-    #night-sky, #night-mountains-trees, #night-foreground-fox {
+    #night-sky, #night-mountains, #night-trees, #night-foreground-fox {
         display: none;
     }
 
     #scene-blur {
-        transition: opacity .5s;
+        transition: opacity 1.5s;
         opacity: 1;
     }
 
@@ -187,9 +188,9 @@ img {
         opacity: 0;
     }
 
-    #sunrise, #sky, #mountains-trees, #foreground-fox {
+    #sunrise, #sky, #mountains, #trees, #foreground-fox {
         opacity: 1;
-        transition: transform 1.5s ease-in-out .2s;
+        transition: transform 2.5s cubic-bezier(.86,0,.07,1) .5s;
     }
 
     #sunrise {
@@ -201,11 +202,15 @@ img {
         transform: scale(4);
     }
 
-    #mountains-trees {
-        transform: scale(2) translate3d(0, 30%, 0);
+    #mountains {
+        transform: scale(2) translate3d(0, 35%, 0);
+    }
+
+    #trees {
+        transform: scale(2) translate3d(0, 31%, 0);
     }
 
     #foreground-fox {
-        transform: scale(3) translate3d(0, 30%, 0)
+        transform: scale(2.5) translate3d(0, 30%, 0)
     }
 }

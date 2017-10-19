@@ -5,21 +5,22 @@
 (function (Mozilla) {
     'use strict';
 
-    var animateSunrise = function () {
+    var beginAnimation = function () {
         var scene = document.getElementById('scene');
         var skipbutton = document.getElementById('skip-button');
+        scene.dataset.animate = 'true'; 
 
         var hideOrShowSkipButton = function (data) {
             switch(data.data.url) {
-            case 'signin':
-            case 'signup':
-            case 'reset_password':
-                skipbutton.disabled = false;
-                skipbutton.classList.remove('skipbutton-hidden');
-                break;
-            default:
-                skipbutton.classList.add('skipbutton-hidden');
-                break;
+                case 'signin':
+                case 'signup':
+                case 'reset_password':
+                    skipbutton.disabled = false;
+                    skipbutton.classList.remove('skipbutton-hidden');
+                    break;
+                default:
+                    skipbutton.classList.add('skipbutton-hidden');
+                    break;
             }
         };
 
@@ -29,12 +30,9 @@
 
         var onVerificationComplete = function () {
             scene.dataset.signIn = 'true';
-            document.getElementById('sunrise').addEventListener('transitionend', function(event) {
-                if (event.propertyName === 'transform') {
-                    window.setTimeout(function () {
-                        // Bug 1381051 sign in should redirect to about:home instead of about:newtab.
-                        window.location.href = 'about:home';
-                    }, 200);
+            document.getElementById('background').addEventListener('transitionend', function(event) {
+                if (event.propertyName === 'opacity') {
+                    window.location.href = 'about:home';
                 }
             }, false);
         };
@@ -48,22 +46,16 @@
                 onVerificationComplete: onVerificationComplete,
                 onLogin: onVerificationComplete,
                 onFormEnabled: disableSkipButton,
-                onNavigated:  hideOrShowSkipButton
+                onNavigated: hideOrShowSkipButton
             });
         });
-
-        scene.dataset.sunrise = 'true';
-
-        document.getElementById('sky').addEventListener('transitionend', function(event) {
-            if (event.propertyName === 'opacity') {
-                scene.dataset.modal = 'true';
-            }
-        }, false);
-    };
+    }
 
     document.onreadystatechange = function () {
         if (document.readyState === 'complete') {
-            animateSunrise();
+            window.setTimeout(function () {
+                beginAnimation();
+            }, 800);
         }
     };
 
